@@ -19,3 +19,5 @@ async function doingRequest(searchQuery, page = 1) {
 }
 
 export { doingRequest, perPage };
+
+// 1
