@@ -15,10 +15,8 @@ async function doingRequest(searchQuery, page = 1) {
     per_page: perPage,
   };
   const resp = await axios.get(MAIN_URL, { params });
-  console.log(resp);
+
   return resp;
 }
 
 export { doingRequest, perPage };
-
-// 1

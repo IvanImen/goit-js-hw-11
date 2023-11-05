@@ -14,8 +14,9 @@ const el = {
 el.form.addEventListener('submit', handlerRequest);
 // el.loadMoreButton.addEventListener('click', handlerLoadMore);
 
-let searchQuery;
+let searchQuery = '';
 let page;
+let instanceSimpleLightbox;
 // el.loadMoreButton.classList.add('js-hidden');
 
 const options = {
@@ -27,20 +28,24 @@ const observer = new IntersectionObserver(handlerLoadMore, options);
 
 function handlerRequest(event) {
   event.preventDefault();
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+
   page = 1;
 
   // el.loadMoreButton.classList.add('js-hidden');
 
-  searchQuery = event.currentTarget.elements['searchQuery'].value.trim();
+  const searchQuery = event.currentTarget.elements['searchQuery'].value.trim();
   if (!searchQuery) {
     Notify.info('Enter your request, please');
     return;
   }
-  console.log(searchQuery, page);
+
   doingRequest(searchQuery)
     .then(({ data }) => {
-      console.log(data);
-
       if (data.hits.length === 0) {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -142,5 +147,3 @@ el.toTopBtn.addEventListener('click', () => {
     behavior: 'smooth',
   });
 });
-
-// 1
